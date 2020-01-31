@@ -1,0 +1,205 @@
+ANGULAR NOTES
+=============
+
+ng new app-name => create a new app with app-name.
+
+ng serve => is used to run the angular app. CTRL + C to kill the app.
+
+control flows from main.ts -> app.module.ts -> app.component.ts and the app.component.html is rendered accordingly.
+
+Component in ANGULAR
+====================
+Component consist of Template(html View) + class(code TypeScript) + metaData
+
+Template consist of HTML code that is view in browser.
+Class consist of actual code that can be used to control the data in the Template(HTML) using methods and properties.
+metaData(Decorator) consist of information which is used to decide if component is a angular component or a simple class. Decorator is used for this purpose.
+
+Relation with app.component in actual Project
+---------------------------------------------
+
+in app.component.ts
+AppComponent is the actual class and in that one property 'title' which can be used in HTML view
+@Component is decorator(annotation) for the particular class which gives information which tells angular that its a angular component and not regular class.
+
+@Component consist of decorators namely
+	selector: 
+	templateUrl:
+	styleUrls:
+	
+selector: 	is used to specify a name for component which acts as a tag in index.html.
+			generally its 'app-root' and in index.html its used in tags <app-root></app-root>
+			all the content between the tags <app-root></app-root> is written in app.component.html file.
+			content of app.component.html is then substituted between tags <app-root></app-root> while rendering.
+			
+templateUrl:	is used to specify the location for app.component.html file.
+
+styleUrls: 	is used to specify the location for css files. 
+			more than one file can be used in styleUrls.
+
+Creating a new component using ANGULAR CLI
+------------------------------------------
+
+ng g c name-of-component => is used to create a new component. g - generate c - component.
+							this command create 4 new files
+								name-of-component.component.html => for view
+								name-of-component.component.spec.ts => for testing purposes (not needed just for testing)
+								name-of-component.component.ts => for acutal class code
+								name-of-component.component.scss => for css code
+							and updates the app.module.ts file.
+							
+so whenever the new component is created Angular must be aware of it.
+we have to import the component file in app.module.ts.
+so we add that component is app.module.ts file in declarations array we add name if the class after AppComponent.
+if component is created using cli then it is automatically added.
+
+declarations array contains all the component we want to use.
+
+NOTE: 	Every new componentin Angular goes inside root component i.e app.component.
+		so newly created component should also go under app.component.html inside <app-root></app-root> tags.
+		
+Selector:
+---------
+selector: 'app-test'   => this can be used simply as a tag in app.component.html <app-test></app-test>
+selector: '.app-test'  => this can be used as class name in app.component.html <div class="app-test"></div>
+selector: '[app-test]' => this can be used as attribute in a tag in app.component.html <div app-test></div>
+		
+templateUrl: / template:
+------------------------
+templateUrl => is used to specify the location of template
+template 	=> is used to write inline html content and backtick ` can be used.
+
+template: `<div>Inline Test</div>` here you can write html code in component.ts file itself.
+
+styleUrls: / styles:
+--------------------
+styleUrls 	=> is used to specify the location of css file
+styles		=> is used to write inline css content and backtick ` can be used.
+
+styles: [`div{color: red}`]
+
+Interpolation in ANGULAR
+========================
+Basically evaluating the code or values present in the component.ts file.
+
+SYNTAX : {{Interpolation Code / Expression}}
+
+<div>Hello {{name}}</div>
+public name = "Chetan"
+
+String 'Chetan' will be substituted in place of name in html div tags.
+a property of name "Chetan" needs to be created in the class.
+string methods, javascript properties can be also used in interpolation.
+
+NOTE:	Assignment of a value to a variable cannot be done using interpolation.
+		Javascript global variable are not accessible in interpolation.
+		
+Global javascript variable can used on component.ts file in class.
+
+Property Binding in ANGULAR
+===========================
+Basically used to bind class properties to html tag attributes.
+
+3 Ways to bind:
+	interpolation	=> 	<input id="{{myId}}" value="Chetan">	=>	<input value="Chetan" id="testId">
+	[square bracket]=>	<input [id]="myId" value="Chetan">		=>	<input value="Chetan" id="testId">
+	bind-attribute	=>	<input bind-id="myId" value="Chetan">	=>	<input value="Chetan" id="testId">
+	
+All of them produces same output after rendering.
+
+NOTE: 	Interpolation only works with string values.
+		Some boolean attribute also need binding so interpolation wont work. for eg. disabled
+
+<input disabled="false" bind-id="myId" value="Chetan"> => this wont work and input field will still be block.
+
+private isDisabled = false;
+<input [disabled]="isDisabled" bind-id="myId" value="Chetan">
+in this way property binding can be used to bind with boolean attributes also.
+
+CSS Class Binding in ANGULAR
+============================
+Basically used to bind css class styles to html elements using Angular class.
+
+.text-success{ color: red; } 				=>	CSS class formating
+private successText = 'text-success'; 		=> 	Property in Angular class
+<div [class]="successText">Chetan</div>		=>	Class binding in html tag
+
+NOTE:	If class binding and normal class is used in a single tag preference will be given to class binding.
+		<div [class]="successText" class="text-special">Chetan</div>
+		here class text-special wont work only the binded class will work.
+
+<div [class.text-danger]="hasError">Chetan</div>
+private hasError = true;
+This way you can apply a class css to html element based on a boolean value.
+
+
+ private hasError = false;
+ private isSpecial = true;
+ private messageClasses = {
+    "text-success": !this.hasError, // HERE hasError is false so value is true and text-success class will be applied.
+    "text-fail": this.hasError,		// HERE hasError is true so value is false and text-fail class will not be applied.
+    "text-special": this.isSpecial	// HERE isSpecial is true so value is true and text-special class will be applied.
+ }
+ <h3 [ngClass]="messageClasses">Chetan</h3>
+ 
+In this way multiple classes can be bind based ona boolean value to html element using [ngClass] directive.
+
+
+Style Binding in ANGULAR
+========================
+Basically you can bind styles directly to html element without writing any code in style component.
+
+SYNTAX : [style.'css-property without quotes']="variable/'direct value'"
+
+	<h3 [style.color]="'orange'">Style Binding</h3>
+    <h3 [style.color]="hasError ? 'orange' : 'pink'">conditional Style Binding</h3>
+    <h3 [style.color]="highlightColor">propert Style Binding</h3>
+    <h3 [ngStyle]="titleStyles">ngStyle Binding</h3>
+	
+	private hasError = true;
+	private highlightColor = "maroon";
+
+	private titleStyles = {
+		color: "blue",
+		fontStyle: "italic"
+	}
+	
+Almost similar to class binding.
+
+Event Binding in ANGULAR
+========================
+Basically assign a event handler to specific events in html page.
+Is used to interact from VIEW/HTML page to BACKEND.
+
+	<button (click)="onClick($event)">Click Me!</button>
+    <h3>{{greet}}</h3>
+	
+	private greet = ""
+	onClick(event){
+		this.greet = "Yay you clicked me!!";
+		console.log(event);
+	}
+	
+Here click is dom event enclosed in parenthesis. And handler onClick() is assigned to it.
+onClick() is defined in Component class.
+
+NOTE:	$event is a special angular event which contains all details of event.
+		Various properties of event can be accessed and used to log activities.
+
+	<button (click)="greet = 'Event Binding'">Click Me!</button> => It is not necessary to assign a event handler when the lines of code is few.
+																	You can directly write the code in the html attribute itself.
+
+Reference Variable in ANGULAR
+=============================
+Reference variable is used to refer html element so its specific property can be used in event handlers.
+
+SYNTAX : #variable-name
+
+	<input #myInput type="text"><button (click)="logMethod(myInput)">Log</button>
+	
+	logMethod(element){
+		console.log(element.value);
+	}
+	
+here 'myInput' is a reference variable and its property value is used to log activity.
+
