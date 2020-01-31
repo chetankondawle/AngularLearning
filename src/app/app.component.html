@@ -415,6 +415,36 @@
 
       <span>Build for Production</span>
     </div>
+    <div class="card card-small" (click)="selection.value = 'testComponent'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>Test Component</span>
+    </div>
+    <div class="card card-small" (click)="selection.value = 'interpolation'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>Interpolation</span>
+    </div>
+    <div class="card card-small" (click)="selection.value = 'propertyBinding'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>Property Binding</span>
+    </div>
+    <div class="card card-small" (click)="selection.value = 'classBinding'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>CSS Class Binding</span>
+    </div>
+    <div class="card card-small" (click)="selection.value = 'styleBinding'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>CSS Style Binding</span>
+    </div>
+    <div class="card card-small" (click)="selection.value = 'eventBinding'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" wing snpm dth="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+      <span>Event Binding</span>
+    </div>
   </div>
 
   <!-- Terminal -->
@@ -424,6 +454,12 @@
       <pre *ngSwitchCase="'dependency'">ng add _____</pre>
       <pre *ngSwitchCase="'test'">ng test</pre>
       <pre *ngSwitchCase="'build'">ng build --prod</pre>
+      <pre *ngSwitchCase="'testComponent'"><app-test></app-test></pre>
+      <pre *ngSwitchCase="'interpolation'"><app-interpolation></app-interpolation></pre>
+      <pre *ngSwitchCase="'propertyBinding'"><app-property-binding></app-property-binding></pre>
+      <pre *ngSwitchCase="'classBinding'"><app-class-binding></app-class-binding></pre>
+      <pre *ngSwitchCase="'styleBinding'"><app-style-binding></app-style-binding></pre>
+      <pre *ngSwitchCase="'eventBinding'"><app-event-binding></app-event-binding></pre>
   </div>
 
   <!-- Links -->
