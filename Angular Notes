@@ -203,3 +203,29 @@ SYNTAX : #variable-name
 	
 here 'myInput' is a reference variable and its property value is used to log activity.
 
+Two Way Binding in ANGULAR
+==========================
+Basically it is used to sync data flow between view and backend.
+Basically combining property binding and event handling together using 'ngModel' directive.
+
+[] = is used for property binding.
+() = is used for event handling.
+[()] = is used for two way binding by combining both of them together.
+
+	<input [(ngModel)]="name" type="text">
+	{{name}}
+
+	private name = "";
+
+using this we can achieve two way binding.
+NOTE:	'ngModel' directive belong to 'FormsModule'.
+		So to use this module we have to import it in app.module.ts file and mentions its entry in imports section.
+
+Structural Binding 'ngIf' Directive
+===================================
+Basically used to implement if else in html rendering.
+
+	<h3 *ngIf='true'>Structural Directive 'ngIf' '*ngIf="true"'</h3>
+    <h3 *ngIf='false'>Structural Directive 'ngIf' '*ngIf="false"'</h3>
+
+NOTES:	*ngIf='false' will not render that particular element, and it will not be visible in source, unlike setting display: none
