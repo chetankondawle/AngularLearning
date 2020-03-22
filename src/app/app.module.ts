@@ -12,6 +12,7 @@ import { StyleBindingComponent } from './style-binding/style-binding.component';
 import { EventBindingComponent } from './event-binding/event-binding.component';
 import { TwoWayBindingComponent } from './two-way-binding/two-way-binding.component';
 import { StructuralDirectiveNgifComponent } from './structural-directive-ngif/structural-directive-ngif.component';
+import { StructuralDirectiveNgswitchComponent } from './structural-directive-ngswitch/structural-directive-ngswitch.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { StructuralDirectiveNgifComponent } from './structural-directive-ngif/st
     StyleBindingComponent,
     EventBindingComponent,
     TwoWayBindingComponent,
-    StructuralDirectiveNgifComponent
+    StructuralDirectiveNgifComponent,
+    StructuralDirectiveNgswitchComponent
   ],
   imports: [
     BrowserModule,

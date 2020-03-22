@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styleUrls: ['./structural-directive-ngif.component.css']
 })
+
 export class StructuralDirectiveNgifComponent implements OnInit {
 
   private display = true
