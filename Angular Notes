@@ -229,3 +229,53 @@ Basically used to implement if else in html rendering.
     <h3 *ngIf='false'>Structural Directive 'ngIf' '*ngIf="false"'</h3>
 
 NOTES:	*ngIf='false' will not render that particular element, and it will not be visible in source, unlike setting display: none
+
+Structural Binding 'ngSwitch' Directive
+=======================================
+Basically used to implement switch case in html rendering or changing elements at run time.
+
+	<button #ref1 value="red" (click)="changeColor(ref1)">RED</button>
+    <button #ref2 value="green" (click)="changeColor(ref2)">GREEN</button>
+    <button #ref3 value="blue" (click)="changeColor(ref3)">BLUE</button>
+    <button #ref4 value="default" (click)="changeColor(ref4)">DEFAULT</button>
+
+	<div [ngSwitch]="color">
+      <h3 *ngSwitchDefault>DEFAULT Case!!</h3>
+      <h3 *ngSwitchCase="'red'" [style.color]="'red'">RED!!</h3>
+      <h3 *ngSwitchCase="'green'" [style.color]="'green'">GREEN!!</h3>
+      <h3 *ngSwitchCase="'blue'" [style.color]="'blue'">BLUE!!</h3>
+    </div>
+	
+	private color = "red";
+	
+	changeColor(element){
+		this.color = element.value
+	}
+	
+NOTE:	*ngSwitchCase should be between the tags that has [ngSwitch]
+
+Structural Binding 'ngFor' Directive
+====================================
+Basically used to implement for loop to render html elements
+	
+	<h3>Structural Directive ngFor '*ngFor="let color of colors"'</h3>
+    <table border = "1 solid white">
+      <tr>
+        <th>Index</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Color</th>
+      </tr>
+      <div *ngFor="let color of colors; index as i; first as f; last as l">
+        <tr>
+          <td><h3>{{ i }}</h3></td>
+          <td><h3>{{ f }}</h3></td>
+          <td><h3>{{ l }}</h3></td>
+          <td><h3 [style.color]=color>{{ color | uppercase }}</h3></td>
+        </tr>
+      </div>
+    </table>
+	
+	private colors = ['red','green','blue','yellow']
+	
+NOTE:	index, first, last are the keywords specific for ngFor
